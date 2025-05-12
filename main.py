@@ -97,9 +97,7 @@ plt.show()
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X_train, y_train)
 y_pred_knn = knn.predict(X_test)
-print("KNN Accuracy:", f'{accuracy_score(y_test, y_pred_knn):.4f}')
-# print("KNN Classification Report:\n", classification_report(y_test, y_pred_knn))
-# print("KNN Confusion Matrix:\n", confusion_matrix(y_test, y_pred_knn))
+print("\nKNN Accuracy:", f'{accuracy_score(y_test, y_pred_knn):.4f}')
 accuracy = accuracy_score(y_test, y_pred_knn)
 print(f"Accuracy (Recognition Rate): {accuracy:.2f} (Calculated)")
 
@@ -119,8 +117,7 @@ svm = SVC()
 svm.fit(X_train, y_train)
 y_pred_svm = svm.predict(X_test)
 print("\nSVM Accuracy:", f'{accuracy_score(y_test, y_pred_svm):.4f}')
-# print("SVM Classification Report:\n", classification_report(y_test, y_pred_svm))
-# print("SVM Confusion Matrix:\n", confusion_matrix(y_test, y_pred_svm))
+
 accuracy = accuracy_score(y_test, y_pred_svm)
 print(f"Accuracy (Recognition Rate): {accuracy:.2f} (Calculated)")
 
@@ -140,8 +137,7 @@ dt_gini = DecisionTreeClassifier(criterion='gini')
 dt_gini.fit(X_train, y_train)
 y_pred_gini = dt_gini.predict(X_test)
 print("Decision Tree (Gini) Accuracy:", f'{accuracy_score(y_test, y_pred_gini):.4f}')
-# print("Gini Classification Report:\n", classification_report(y_test, y_pred_gini))
-# print("Gini Confusion Matrix:\n",confusion_matrix(y_test, y_pred_gini))
+
 accuracy = accuracy_score(y_test, y_pred_gini)
 print(f"Accuracy (Recognition Rate): {accuracy:.2f} (Calculated)")
 
@@ -160,8 +156,7 @@ dt_entropy = DecisionTreeClassifier(criterion='entropy')
 dt_entropy.fit(X_train, y_train)
 y_pred_entropy = dt_entropy.predict(X_test)
 print("Decision Tree (Entropy) Accuracy:", f'{accuracy_score(y_test, y_pred_entropy):.4f}')
-# print("Entropy Classification Report:\n", classification_report(y_test, y_pred_entropy))
-# print("Entropy Confusion Matrix:\n", confusion_matrix(y_test, y_pred_entropy))
+
 accuracy = accuracy_score(y_test, y_pred_entropy)
 print(f"Accuracy (Recognition Rate): {accuracy:.2f} (Calculated)")
 
@@ -183,8 +178,7 @@ mlp = MLPClassifier(hidden_layer_sizes=(64, 32), max_iter=300)
 mlp.fit(X_train, y_train)
 y_pred_mlp = mlp.predict(X_test)
 print("Neural Network (MLP) Accuracy:", f'{accuracy_score(y_test, y_pred_mlp):.4f}')
-# print("MLP Classification Report:\n", classification_report(y_test, y_pred_mlp))
-# print("MLP Confusion Matrix:\n", confusion_matrix(y_test, y_pred_mlp))
+
 accuracy = accuracy_score(y_test, y_pred_mlp)
 print(f"Accuracy (Recognition Rate): {accuracy:.2f} (Calculated)")
 
@@ -200,15 +194,12 @@ print(f"F₁-score (Harmonic Mean of Precision and Recall): {f1:.2f} (Calculated
 ### --- Random Forest Classifier ---
 # An ensemble of 100 decision trees.
 # More robust and less overfitting than a single decision tree.
+# Calculate and print the evaluation metrics
 rf = RandomForestClassifier(n_estimators=100)
 rf.fit(X_train, y_train)
 y_pred_rf = rf.predict(X_test)
 print("Random Forest Accuracy:", f'{accuracy_score(y_test, y_pred_rf):.4f}')
-# print("Random Forest Classification Report:\n", classification_report(y_test, y_pred_rf))
-# print("Random Forest Confusion Matrix:\n", confusion_matrix(y_test, y_pred_rf))
 
-# Calculate and print the evaluation metrics
-# Example: Using predictions from the Random Forest model
 accuracy = accuracy_score(y_test, y_pred_rf)
 print(f"Accuracy (Recognition Rate): {accuracy:.2f} (Calculated)")
 
