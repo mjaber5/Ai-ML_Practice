@@ -7,8 +7,11 @@ import seaborn as sns
 # train_test_split: splits the dataset into training and testing sets.
 # accuracy_score: evaluates how accurate the model is.
 from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score, recall_score, f1_score
+
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
@@ -16,7 +19,10 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
 
+
 # = Load Preprocessed CSV Data =
+# 42 feature | column
+# 22545 Row  
 df = pd.read_csv('data_train.csv')
 
 # = Encode Categorical Features =
@@ -91,7 +97,20 @@ plt.show()
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X_train, y_train)
 y_pred_knn = knn.predict(X_test)
-print("KNN Accuracy:", accuracy_score(y_test, y_pred_knn))
+print("KNN Accuracy:", f'{accuracy_score(y_test, y_pred_knn):.4f}')
+# print("KNN Classification Report:\n", classification_report(y_test, y_pred_knn))
+# print("KNN Confusion Matrix:\n", confusion_matrix(y_test, y_pred_knn))
+accuracy = accuracy_score(y_test, y_pred_knn)
+print(f"Accuracy (Recognition Rate): {accuracy:.2f} (Calculated)")
+
+precision = precision_score(y_test, y_pred_knn, average='weighted')
+print(f"Precision: {precision:.2f} (Calculated)")
+
+recall = recall_score(y_test, y_pred_knn, average='weighted')
+print(f"Sensitivity (Recall, True Positive Rate): {recall:.2f} (Calculated)")
+
+f1 = f1_score(y_test, y_pred_knn, average='weighted')
+print(f"F₁-score (Harmonic Mean of Precision and Recall): {f1:.2f} (Calculated)\n")
 
 ### --- Support Vector Machine (SVM) ---
 # Tries to find the best decision boundary between classes.
@@ -99,7 +118,20 @@ print("KNN Accuracy:", accuracy_score(y_test, y_pred_knn))
 svm = SVC()
 svm.fit(X_train, y_train)
 y_pred_svm = svm.predict(X_test)
-print("SVM Accuracy:", accuracy_score(y_test, y_pred_svm))
+print("\nSVM Accuracy:", f'{accuracy_score(y_test, y_pred_svm):.4f}')
+# print("SVM Classification Report:\n", classification_report(y_test, y_pred_svm))
+# print("SVM Confusion Matrix:\n", confusion_matrix(y_test, y_pred_svm))
+accuracy = accuracy_score(y_test, y_pred_svm)
+print(f"Accuracy (Recognition Rate): {accuracy:.2f} (Calculated)")
+
+precision = precision_score(y_test, y_pred_svm, average='weighted')
+print(f"Precision: {precision:.2f} (Calculated)")
+
+recall = recall_score(y_test, y_pred_svm, average='weighted')
+print(f"Sensitivity (Recall, True Positive Rate): {recall:.2f} (Calculated)")
+
+f1 = f1_score(y_test, y_pred_svm, average='weighted')
+print(f"F₁-score (Harmonic Mean of Precision and Recall): {f1:.2f} (Calculated)\n")
 
 ### --- Decision Tree (Gini) ---
 # Builds a tree using the Gini Index to decide splits.
@@ -107,14 +139,40 @@ print("SVM Accuracy:", accuracy_score(y_test, y_pred_svm))
 dt_gini = DecisionTreeClassifier(criterion='gini')
 dt_gini.fit(X_train, y_train)
 y_pred_gini = dt_gini.predict(X_test)
-print("Decision Tree (Gini) Accuracy:", accuracy_score(y_test, y_pred_gini))
+print("Decision Tree (Gini) Accuracy:", f'{accuracy_score(y_test, y_pred_gini):.4f}')
+# print("Gini Classification Report:\n", classification_report(y_test, y_pred_gini))
+# print("Gini Confusion Matrix:\n",confusion_matrix(y_test, y_pred_gini))
+accuracy = accuracy_score(y_test, y_pred_gini)
+print(f"Accuracy (Recognition Rate): {accuracy:.2f} (Calculated)")
+
+precision = precision_score(y_test, y_pred_gini, average='weighted')
+print(f"Precision: {precision:.2f} (Calculated)")
+
+recall = recall_score(y_test, y_pred_gini, average='weighted')
+print(f"Sensitivity (Recall, True Positive Rate): {recall:.2f} (Calculated)")
+
+f1 = f1_score(y_test, y_pred_gini, average='weighted')
+print(f"F₁-score (Harmonic Mean of Precision and Recall): {f1:.2f} (Calculated)\n")
 
 ### --- Decision Tree (Entropy) ---
 # Similar to Gini, but uses entropy to measure impurity.
 dt_entropy = DecisionTreeClassifier(criterion='entropy')
 dt_entropy.fit(X_train, y_train)
 y_pred_entropy = dt_entropy.predict(X_test)
-print("Decision Tree (Entropy) Accuracy:", accuracy_score(y_test, y_pred_entropy))
+print("Decision Tree (Entropy) Accuracy:", f'{accuracy_score(y_test, y_pred_entropy):.4f}')
+# print("Entropy Classification Report:\n", classification_report(y_test, y_pred_entropy))
+# print("Entropy Confusion Matrix:\n", confusion_matrix(y_test, y_pred_entropy))
+accuracy = accuracy_score(y_test, y_pred_entropy)
+print(f"Accuracy (Recognition Rate): {accuracy:.2f} (Calculated)")
+
+precision = precision_score(y_test, y_pred_entropy, average='weighted')
+print(f"Precision: {precision:.2f} (Calculated)")
+
+recall = recall_score(y_test, y_pred_entropy, average='weighted')
+print(f"Sensitivity (Recall, True Positive Rate): {recall:.2f} (Calculated)")
+
+f1 = f1_score(y_test, y_pred_entropy, average='weighted')
+print(f"F₁-score (Harmonic Mean of Precision and Recall): {f1:.2f} (Calculated)\n")
 
 ### --- Neural Network (MLPClassifier) ---
 # A small neural network with:
@@ -124,7 +182,20 @@ print("Decision Tree (Entropy) Accuracy:", accuracy_score(y_test, y_pred_entropy
 mlp = MLPClassifier(hidden_layer_sizes=(64, 32), max_iter=300)
 mlp.fit(X_train, y_train)
 y_pred_mlp = mlp.predict(X_test)
-print("Neural Network (MLP) Accuracy:", accuracy_score(y_test, y_pred_mlp))
+print("Neural Network (MLP) Accuracy:", f'{accuracy_score(y_test, y_pred_mlp):.4f}')
+# print("MLP Classification Report:\n", classification_report(y_test, y_pred_mlp))
+# print("MLP Confusion Matrix:\n", confusion_matrix(y_test, y_pred_mlp))
+accuracy = accuracy_score(y_test, y_pred_mlp)
+print(f"Accuracy (Recognition Rate): {accuracy:.2f} (Calculated)")
+
+precision = precision_score(y_test, y_pred_mlp, average='weighted')
+print(f"Precision: {precision:.2f} (Calculated)")
+
+recall = recall_score(y_test, y_pred_mlp, average='weighted')
+print(f"Sensitivity (Recall, True Positive Rate): {recall:.2f} (Calculated)")
+
+f1 = f1_score(y_test, y_pred_mlp, average='weighted')
+print(f"F₁-score (Harmonic Mean of Precision and Recall): {f1:.2f} (Calculated)\n")
 
 ### --- Random Forest Classifier ---
 # An ensemble of 100 decision trees.
@@ -132,4 +203,70 @@ print("Neural Network (MLP) Accuracy:", accuracy_score(y_test, y_pred_mlp))
 rf = RandomForestClassifier(n_estimators=100)
 rf.fit(X_train, y_train)
 y_pred_rf = rf.predict(X_test)
-print("Random Forest Accuracy:", accuracy_score(y_test, y_pred_rf))
+print("Random Forest Accuracy:", f'{accuracy_score(y_test, y_pred_rf):.4f}')
+# print("Random Forest Classification Report:\n", classification_report(y_test, y_pred_rf))
+# print("Random Forest Confusion Matrix:\n", confusion_matrix(y_test, y_pred_rf))
+
+# Calculate and print the evaluation metrics
+# Example: Using predictions from the Random Forest model
+accuracy = accuracy_score(y_test, y_pred_rf)
+print(f"Accuracy (Recognition Rate): {accuracy:.2f} (Calculated)")
+
+precision = precision_score(y_test, y_pred_rf, average='weighted')
+print(f"Precision: {precision:.2f} (Calculated)")
+
+recall = recall_score(y_test, y_pred_rf, average='weighted')
+print(f"Sensitivity (Recall, True Positive Rate): {recall:.2f} (Calculated)")
+
+f1 = f1_score(y_test, y_pred_rf, average='weighted')
+print(f"F₁-score (Harmonic Mean of Precision and Recall): {f1:.2f} (Calculated)\n")
+
+
+# Store metrics in a dictionary
+metrics = {
+    'Model': [],
+    'Accuracy': [],
+    'Precision': [],
+    'Recall': [],
+    'F1-score': []
+}
+
+# Helper function to evaluate models
+def add_metrics(name, y_true, y_pred):
+    metrics['Model'].append(name)
+    metrics['Accuracy'].append(round(accuracy_score(y_true, y_pred), 4))
+    metrics['Precision'].append(round(precision_score(y_true, y_pred, average='weighted'), 4))
+    metrics['Recall'].append(round(recall_score(y_true, y_pred, average='weighted'), 4))
+    metrics['F1-score'].append(round(f1_score(y_true, y_pred, average='weighted'), 4))
+
+# Add all model results
+add_metrics('KNN', y_test, y_pred_knn)
+add_metrics('SVM', y_test, y_pred_svm)
+add_metrics('DT-Gini', y_test, y_pred_gini)
+add_metrics('DT-Entropy', y_test, y_pred_entropy)
+add_metrics('MLP', y_test, y_pred_mlp)
+add_metrics('Random Forest', y_test, y_pred_rf)
+
+# Convert to DataFrame for easier plotting
+metrics_df = pd.DataFrame(metrics)
+
+# === Plotting grouped bar chart ===
+plt.figure(figsize=(12, 6))
+bar_width = 0.2
+x = range(len(metrics_df))
+
+# Plot each metric
+plt.bar([i - 1.5 * bar_width for i in x], metrics_df['Accuracy'], width=bar_width, label='Accuracy')
+plt.bar([i - 0.5 * bar_width for i in x], metrics_df['Precision'], width=bar_width, label='Precision')
+plt.bar([i + 0.5 * bar_width for i in x], metrics_df['Recall'], width=bar_width, label='Recall')
+plt.bar([i + 1.5 * bar_width for i in x], metrics_df['F1-score'], width=bar_width, label='F1-score')
+
+# Finalize chart
+plt.xticks(x, metrics_df['Model'])
+plt.ylabel('Score')
+plt.ylim(0, 1.05)
+plt.title('Comparison of Model Performance Metrics')
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
